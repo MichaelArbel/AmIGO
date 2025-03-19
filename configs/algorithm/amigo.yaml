@@ -1,0 +1,23 @@
+name: 'amigo'
+opt_iter : 1 #### lower level updates per upper-level update
+unrolled_iter: 0 #### lower level updates that are differentiated through, must be smaller than opt_iter (set to 0 for AmIGO)
+implicit_diff: True 
+dual_var_warm_start: True
+
+optimizer:
+  name: 'torchopt.sgd'
+  momentum: 0.
+  lr: 0.9
+scheduler:
+  name: 'torch.optim.lr_scheduler.CosineAnnealingLR'
+  T_max: ${training.total_epoch}
+  use_scheduler: False
+linear_solver:
+  name: 'core.linear_solvers.Normal_GD'
+  lr: 0.9
+  n_iter: 1
+linear_op: 
+  name: 'core.selection.HessianOp'
+  stochastic: True
+  use_new_input: True
+  compute_new_grad: True

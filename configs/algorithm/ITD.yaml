@@ -1,0 +1,14 @@
+name: 'ITD'
+warm_start_iter : 0
+unrolled_iter: 1
+implicit_diff: False
+dual_var_warm_start: False
+
+optimizer:
+  name: 'torchopt.sgd'
+  momentum: 0.9
+  lr: 0.1
+scheduler:
+  name: 'torch.optim.lr_scheduler.CosineAnnealingLR'
+  T_max: ${training.total_epoch}
+  use_scheduler: True

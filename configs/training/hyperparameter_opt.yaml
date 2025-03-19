@@ -1,0 +1,58 @@
+trainer_name: 'examples.hyperparameteropt.trainer.Trainer'
+total_epoch: 40000
+resume: False
+
+
+metrics:
+  disp_freq: 1
+  max_upper_iter: 1
+  max_lower_iter : 1
+  epoch_eval: True
+  log_artefacts_freq: 200
+  log_artifacts: True
+  log_lower_cond: False
+  freq_lower_cond: 5000
+  eval_test: True
+  name: 'value'
+
+
+loader:
+  name : '20newsgroups_'
+  b_size : 100
+  val_size_ratio: 0.5
+  data_path : 'data/datasets'
+
+upper:
+  objective:
+    name: 'examples.hyperparameteropt.models.Logistic'
+    reg: 0.
+  model:
+    name: 'examples.hyperparameteropt.models.Identity'
+    dim: 1
+  optimizer:
+    name: 'torch.optim.Adam'
+    lr : 0.0003
+    weight_decay: 0.
+  scheduler:
+    name: 'torch.optim.lr_scheduler.ReduceLROnPlateau'
+    patience: 1
+    use_scheduler: False
+  clip: False
+  max_norm: 1.
+ 
+
+lower:
+  objective:
+    name: 'examples.hyperparameteropt.models.Logistic'
+    reg: 0.
+  model:
+    name: 'examples.hyperparameteropt.models.Linear'
+    n_features : 1
+    n_classes : 1
+    with_bias : false
+
+
+
+
+
+
